@@ -48,16 +48,16 @@ def windSpeedToColour(windSpeed):
 while True:
   try:
     n = requests.get("https://weather-broker-cdn.api.bbci.co.uk/en/observation/rss/" + locationId)
-    m = re.search('Temperature: (-?\d+)', n.text)
+    m = re.search('Temperature: (-?\\d+)', n.text)
     print("Observed: " + m.group(1) + os.linesep)
     observedTemperature = int(m.group(1))
 
-    m = re.search('Wind Speed: (\d+)', n.text)
+    m = re.search('Wind Speed: (\\d+)', n.text)
     print("Wind Speed: " + m.group(1) + os.linesep)
     observedWindSpeed = int(m.group(1))
 
     f = requests.get("https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/" + locationId)
-    m = re.findall('n>Maximum Temperature: (-?\d+)', f.text)
+    m = re.findall('n>Maximum Temperature: (-?\\d+)', f.text)
 
     # When the sun sets there is no longer a maximum forecast, just use the observed
     if(len(m) == 2):
@@ -66,7 +66,7 @@ while True:
     print("Day 1 Max:" + m[0] + ", Day 2 Max:" + m[1] + ", Day 3 Max:" + m[2] + os.linesep)
     forecastMaximum = [int(m[2]), int(m[1]), int(m[0])]
 
-    m = re.findall('Minimum Temperature: (-?\d+)', f.text)
+    m = re.findall('Minimum Temperature: (-?\\d+)', f.text)
     print("Day 1 Min:" + m[0] + ", Day 2 Min:" + m[1] + ", Day 3 Min:" + m[2] + os.linesep)
     forecastMinimum = [int(m[2]), int(m[1]), int(m[0])]
 
