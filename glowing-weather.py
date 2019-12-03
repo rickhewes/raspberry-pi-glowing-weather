@@ -2,10 +2,14 @@
 
 import time
 import requests
-import unicornhat as unicorn
 import re
 import sys
 import os
+
+try:
+    import unicornhat as unicorn
+except ImportError:
+    from unicorn_hat_sim import unicornphat as unicorn
 
 print("""Glowing Weather
 
@@ -67,19 +71,21 @@ while True:
     forecastMinimum = [int(m[2]), int(m[1]), int(m[0])]
 
     for y in range(4):
-      unicorn.set_pixel(7,y,hexToRgb(windSpeedToColour(observedWindSpeed)))
+      r, g, b = hexToRgb(windSpeedToColour(observedWindSpeed))
+      unicorn.set_pixel(7,y,r,g,b)
 
     for y in range(4):
       for x in range(3,7):
-        unicorn.set_pixel(x,y,hexToRgb(celciusToColour(observedTemperature)))
+        r, g, b = hexToRgb(celciusToColour(observedTemperature))
+        unicorn.set_pixel(x,y,r,g,b)
 
     for d in range(2, -1, -1):
-      maxRgb = hexToRgb(celciusToColour(forecastMaximum[d]))
-      unicorn.set_pixel(d,3,maxRgb)
-      unicorn.set_pixel(d,2,maxRgb)
-      minRgb = hexToRgb(celciusToColour(forecastMinimum[d]))
-      unicorn.set_pixel(d,1,minRgb)
-      unicorn.set_pixel(d,0,minRgb)
+      r, g, b = hexToRgb(celciusToColour(forecastMaximum[d]))
+      unicorn.set_pixel(d,3,r,g,b)
+      unicorn.set_pixel(d,2,r,g,b)
+      r, g, b = hexToRgb(celciusToColour(forecastMinimum[d]))
+      unicorn.set_pixel(d,1,r,g,b)
+      unicorn.set_pixel(d,0,r,g,b)
 
     unicorn.show()
 

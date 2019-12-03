@@ -14,7 +14,12 @@ Here is the temperature map that is used for the observational and 3 day forecas
 
 Install the support library for the unicorn-hat if you haven't already:
 ```bash
-\curl -sS https://get.pimoroni.com/unicornhat | bash
+curl -sS https://get.pimoroni.com/unicornhat | bash
+```
+
+Optional, install the unicorn hat [simulator](https://github.com/jayniz/unicorn-hat-sim) (for running without the unicorn-hat on a desktop):
+```
+sudo pip3 install git+git://github.com/adamkaplan/unicorn-hat-sim@patch-1#egg=unicorn-hat-sim
 ```
 
 Clone and run the python script;
