@@ -93,5 +93,5 @@ while True:
     time.sleep(1800)
   except KeyboardInterrupt:
     raise
-  else:
+  except:
     continue
